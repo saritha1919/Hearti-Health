@@ -1,4 +1,4 @@
-$Website = "GT-ComplyRite_MasterData"
+$Website = "Test-Angular"
 $WebsiteStatus = (Get-WebsiteState -Name $Website).value
 if(!($WebsiteStatus -eq 'Stopped')){
 Stop-Website -Name $Website
