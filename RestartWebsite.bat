@@ -1,2 +1,2 @@
 @ECHO OFF
-powershell -ExecutionPolicy ByPass -File "C:\Program Files (x86)\Jenkins\workspace\Hearti-Health-Angular\StopWebsite.ps1" 
+powershell -ExecutionPolicy ByPass -File "C:\WindowService\batfile\StopWebsite.ps1" 
