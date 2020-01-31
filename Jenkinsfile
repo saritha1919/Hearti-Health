@@ -8,7 +8,7 @@ pipeline {
                        echo "${path}"
 			              }        
                  }
-                  stage('Build') {
+                 /* stage('Build') {
                             steps { 
                               script{
                                 bat label: '', script: 'npm install'
@@ -21,11 +21,11 @@ pipeline {
                          steps{ 
                              archiveArtifacts 'dist/**' 
                          } 
-                 } 
+                 } */
                   stage('Deployment'){
 			             steps{
                      script{
-                       dir("E:\\Application\\Test\\Live")
+                       dir("${path}\\Live")
                        {
                          fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: "dist\\**", targetLocation: "E:\\Application\\Test\\Backup")])
                        }
