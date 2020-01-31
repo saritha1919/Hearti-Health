@@ -5,7 +5,7 @@ pipeline {
                  stage('Source') {
                     steps {
                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url:'https://github.com/saritha1919/Hearti-Health.git']]])
-                       echo ${path}
+                       echo "${path}"
 			              }        
                  }
                   stage('Build') {
