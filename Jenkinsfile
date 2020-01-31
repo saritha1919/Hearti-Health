@@ -1,20 +1,21 @@
+ def path = "E:\\Application\\Test"
 pipeline {
          agent any
-             stages {
-	    
+           stages {
                  stage('Source') {
                     steps {
                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url:'https://github.com/saritha1919/Hearti-Health.git']]])
+                       echo ${path}
 			              }        
                  }
-                  /*stage('Build') {
+                  stage('Build') {
                             steps { 
                               script{
                                 bat label: '', script: 'npm install'
-                                bat label: '', script: 'npm run ng -- build'
+                                bat label: '', script: 'npm run ng -- build --prod'
                               }
                             }
-                  }*/
+                  }
                stage('Archiving Artifacts') { 
                          steps{ 
                              archiveArtifacts 'dist/**' 
@@ -23,7 +24,10 @@ pipeline {
                   stage('Deployment'){
 			             steps{
                      script{
-                       //bat label: '', script: 'npm run ng serve'
+                       dir("E:\\Application\\Test\\Live")
+                       {
+                         fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: "dist\\**", targetLocation: "E:\\Application\\Test\\Backup")])
+                       }
                        fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: "dist\\**", targetLocation: "E:\\Application\\Test\\Live")])
                        dir('E:\\Application\\Test\\Config'){
                        fileOperations([fileCopyOperation(excludes: '', flattenFiles: false, includes: "\\**", targetLocation: "E:\\Application\\Test\\Live\\dist")])
